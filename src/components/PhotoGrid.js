@@ -52,7 +52,7 @@ class PhotoGrid extends React.Component {
       return (
         <div className="photos">
           {photos.map( (photo, i) => {
-            return <Photo key={i} {...photo} />
+            return <Photo key={i} photo={photo} />
           })}
         </div>
       )

@@ -11,11 +11,11 @@ const NavSection = function(){
           </br>
           <br>
           </br>
-          <h1>Tori Moca</h1>
+          <Link to="/"><h1>Tori Moca</h1></Link>
         </div>
         <ul>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/">Porfolio</Link></li>
+          <li><Link to="/">Portfolio</Link></li>
           <li><Link to="/contact">Contact</Link></li>
         </ul>
       </div>

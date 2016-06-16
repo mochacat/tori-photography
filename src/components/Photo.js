@@ -5,14 +5,17 @@ class Photo extends React.Component {
     super(props)
     this.state = {
       hover: false,
-      display: false
+      display: false,
+      delay : 0.5,
     }
     
     this.toggleHover = this.toggleHover.bind(this)
+    this.handleMouseDown = this.handleMouseDown.bind(this)
     this.show = this.show.bind(this)
   }
   
   componentDidMount() {
+    //do the initial fade in at random intervals
     setTimeout( () => this.show(), 500)
   }
   
@@ -24,9 +27,19 @@ class Photo extends React.Component {
     this.setState({ hover: !this.state.hover })
   }
   
+  handleMouseDown(e){
+    console.log(e.button)
+    if (e.button == 2){
+      e.preventDefault();
+	    e.stopPropagation();
+	    e.cancelBubble = true;
+	    return false;
+    }
+  }
+  
   render() {
     
-    let width = this.props.width ? this.props.width : 'auto'
+    let width = this.props.photo.width ? this.props.photo.width : 'auto'
     
     //set separate opacities for initial fade in and later mouse hover
     let opacity = '1'
@@ -36,17 +49,26 @@ class Photo extends React.Component {
       opacity = '.25'
     }
     
+    //transition speed different for initial fade in and later mouse hover'
+    
     let imgStyle = {
       width:width,
       opacity: opacity
     }
     
+    //transition: all .5s ease-in-out;
+    
     let fadeIn = this.state.hover ? 'fade-in' : 'fade-in pause'
     
     return (
-      <div className="img-container" onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
-        <img src={this.props.src} alt={this.props.alt} style={imgStyle}/>
-        <div className={'title ' + fadeIn}><p>{this.props.alt}</p></div>
+      <div
+        className="img-container"
+        onMouseDown={this.handleMouseDown}
+        onMouseEnter={this.toggleHover}
+        onMouseLeave={this.toggleHover}
+      >
+        <img src={this.props.photo.src} alt={this.props.photo.alt} style={imgStyle}/>
+        <div className={'title ' + fadeIn}><p>{this.props.photo.alt}</p></div>
       </div>
     )
   }
