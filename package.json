@@ -9,17 +9,7 @@
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=dev node server.js",
-    "postinstall": "NODE_ENV=prod webpack --progress --colos --watch",
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
+    "webpack-dev-server": "^1.14.1",
     "babel-core": "^6.9.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -36,5 +26,15 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=dev node server.js",
+    "postinstall": "NODE_ENV=prod webpack --progress --colos --watch",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
   }
 }
