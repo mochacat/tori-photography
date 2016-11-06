@@ -7,7 +7,7 @@ var app = express()
 
 app.use(express.static(path.resolve(__dirname, 'public')))
 
-if (process.env.NODE_ENV !== 'prod'){
+if (process.env.NODE_ENV !== 'production'){
   
   var bundle = require('./bundle.js')
   bundle()
