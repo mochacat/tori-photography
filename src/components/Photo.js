@@ -28,7 +28,6 @@ class Photo extends React.Component {
   }
   
   handleMouseDown(e){
-    console.log(e.button)
     if (e.button == 2){
       e.preventDefault();
 	    e.stopPropagation();

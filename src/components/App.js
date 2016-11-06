@@ -15,7 +15,7 @@ export default class App extends React.Component{
         <div className="content">
           { React.cloneElement(
               this.props.children,
-              this.props
+              { ...this.props }
           )}
         </div>
       </div>
