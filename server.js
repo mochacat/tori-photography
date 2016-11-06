@@ -2,8 +2,9 @@ var express = require('express')
   path = require('path'),
   httpProxy = require('http-proxy');
 
-var proxy = httpProxy.createProxyServer();
+var proxy = httpProxy.createProxyServer()
 var app = express()
+var port = process.env.PORT || 3000
 
 app.use(express.static(path.resolve(__dirname, 'public')))
 
@@ -24,6 +25,6 @@ proxy.on('error', function(e){
   console.log('Error on proxy', e)
 })
 
-app.listen(3000, function() {
-  console.log('Listening on port 3000')
+app.listen(port, function() {
+  console.log('Listening on port ' + port)
 })
