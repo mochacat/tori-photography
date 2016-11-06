@@ -3,11 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'sourcemaps',
-  entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    './src/index'
-  ],
+  entry: './src/index',
   output: {
     path: path.join(__dirname, 'public', 'static'),
     filename: 'bundle.js',
@@ -17,8 +13,9 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['react-hot', 'babel'],
-        include: path.join(__dirname, 'src')
+        loader: 'babel',
+        include: path.join(__dirname, 'src'),
+        exclude: path.join(__dirname, 'node_modules')
       },
       { test: /\.scss$/, loaders: ["style", "css", "sass"] },
       { test: /\.css$/, loader: "style!css" },
@@ -26,7 +23,4 @@ module.exports = {
       { test: /\.(otf|eot|ttf|woff|woff2)$/, loader: 'file' }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
 };

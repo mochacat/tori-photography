@@ -1,15 +1,29 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var express = require('express')
+  path = require('path'),
+  httpProxy = require('http-proxy');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  contentBase: './public'
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log('Listening at http://localhost:3000/', result);
-});
+var proxy = httpProxy.createProxyServer();
+var app = express()
+
+app.use(express.static(path.resolve(__dirname, 'public')))
+
+if (process.env.NODE_ENV !== 'prod'){
+  
+  var bundle = require('./bundle.js')
+  bundle()
+ 
+  //proxy back to webpack-dev-server 
+  app.all('/static/*', function (req, res){
+    proxy.web(req, res, {
+      target: 'http://localhost:8080'
+    })
+  })
+}
+
+proxy.on('error', function(e){
+  console.log('Error on proxy', e)
+})
+
+app.listen(3000, function() {
+  console.log('Listening on port 3000')
+})
